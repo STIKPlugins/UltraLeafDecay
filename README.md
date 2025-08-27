@@ -24,27 +24,28 @@
   <summary><strong>config.yml</strong></summary>
 
   ```yaml
-# Join our discord - https://discord.gg/YGzA4UxzFB you can find other cool plugins there.
-# Permissions
-# "ultraLeafDecay.reload" - permission required to use "/ultraleafdecay reload" command
+# Join our discord - https://discord.gg/YGzA4UxzFB you can find another good plugins there.
 
 # Maximum distance from leaves to the nearest log block
 # Leaves with distance greater than or equal to this value will be destroyed
 # Default: 6 (matches vanilla Minecraft behavior)
 # Range: 1-7 (values outside this range may cause unexpected behavior)
-maxLogDistance: 6
+max-log-distance: 6
+
+# Permission required to use "/ultraleafdecay reload" command
+reload-permission: "ultraLeafDecay.reload"
 
 # supports MiniMessage
-noPermissionToReload: "<red>✘ <white>You don't have permission to reload Config!"
-configReloaded: "<green>✔ <white>Config reloaded!"
+no-permission-to-reload: "<red>✘ <white>You don't have permission to reload Config!"
+config-reloaded: "<green>✔ <white>Config reloaded!"
 ````
 
 </details>
 
 ### Permissions 🔐
 
-| Permission Node         | Description                        |
-| ----------------------- | ---------------------------------- |
+| Permission Node               | Description                        |
+|-------------------------------| ---------------------------------- |
 | `ultraLeafDecay.reload` | Allows reloading the plugin config |
 
 ### Commands 📟
