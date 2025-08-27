@@ -8,22 +8,17 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
-public class ReloadCommand implements CommandExecutor {
-    private final JavaPlugin plugin;
-
-    public ReloadCommand(JavaPlugin plugin) {
-        this.plugin = plugin;
-    }
+public record ReloadCommand(JavaPlugin plugin, Config config) implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        if (!sender.hasPermission("ultraLeafDecay.reload")) {
-            sender.sendMessage(Config.noPermissionToReload);
+        if (!sender.hasPermission(config.getReloadPermission())) {
+            sender.sendMessage(config.getNoPermissionToReload());
             return false;
         }
-        Bukkit.getAsyncScheduler().runNow(plugin, task -> Config.reload());
+        Bukkit.getAsyncScheduler().runNow(plugin, task -> config.reload());
 
-        sender.sendMessage(Config.configReloaded);
+        sender.sendMessage(config.getConfigReloaded());
         return true;
     }
 }

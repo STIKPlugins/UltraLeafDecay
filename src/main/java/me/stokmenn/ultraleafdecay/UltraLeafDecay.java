@@ -10,9 +10,9 @@ public final class UltraLeafDecay extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        Config.init(this);
-        getCommand("ultraleafdecay").setExecutor(new ReloadCommand(this));
+        Config config = new Config(this);
+        getCommand("ultraleafdecay").setExecutor(new ReloadCommand(this, config));
 
-        Bukkit.getPluginManager().registerEvents(new BlockBreakListener(), this);
+        Bukkit.getPluginManager().registerEvents(new BlockBreakListener(config), this);
     }
 }

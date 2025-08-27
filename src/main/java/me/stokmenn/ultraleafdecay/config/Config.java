@@ -6,29 +6,46 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Config {
-    private static JavaPlugin plugin;
+    private final JavaPlugin plugin;
 
-    public static int maxLogDistance;
+    private int maxLogDistance;
 
-    public static Component noPermissionToReload;
-    public static Component configReloaded;
+    private String reloadPermission;
 
-    public static void init(JavaPlugin plugin) {
-        Config.plugin = plugin;
+    private Component noPermissionToReload;
+    private Component configReloaded;
+
+    public Config(JavaPlugin plugin) {
+        this.plugin = plugin;
         plugin.saveDefaultConfig();
         reload();
     }
 
-    public static void reload() {
+    public void reload() {
         plugin.reloadConfig();
         FileConfiguration config = plugin.getConfig();
 
-        maxLogDistance = config.getInt("maxLogDistance", 6);
+        maxLogDistance = config.getInt("max-log-distance", 6);
+
+        reloadPermission = config.getString("reload-permission", "ultraLeafDecay.reload");
 
         noPermissionToReload = MiniMessage.miniMessage().deserialize(config.getString(
-                "noPermissionToReload", "<red>✘ <white>You don't have permission to reload Config!"));
+                "no-permission-to-reload", "<red>✘ <white>You don't have permission to reload Config!"));
 
         configReloaded = MiniMessage.miniMessage().deserialize(config.getString(
-                "configReloaded", "<green>✔ <white>Config reloaded!"));
+                "config-reloaded", "<green>✔ <white>Config reloaded!"));
+    }
+
+    public int getMaxLogDistance() {
+        return maxLogDistance;
+    }
+    public String getReloadPermission() {
+        return reloadPermission;
+    }
+    public Component getNoPermissionToReload() {
+        return noPermissionToReload;
+    }
+    public Component getConfigReloaded() {
+        return configReloaded;
     }
 }

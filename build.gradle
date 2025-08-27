@@ -40,7 +40,7 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 tasks.named('jar') {
-    destinationDirectory = file("D:/Download/Server 1.21/plugins/")
+    destinationDirectory = file("D:/Download/Folia 1.21.5/plugins/")
 }
 
 processResources {
